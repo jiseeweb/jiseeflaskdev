@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+{% block webpage_content %}
+	<div class='content-section'>
+		<form action="" method="POST" accept-charset="utf-8">
+			{{ form.hidden_tag() }}
+			<fieldset class='form-group'>
+				<legend class='border-bottom mb-4'>Create Post</legend>
+
+				<!-- Email Field -->
+				<div class='form-group'>
+					{{ form.title.label(class='form-control-label') }}
+					{% if form.title.errors %}
+						{{ form.title(class='form-control form-control-lg is-invalid') }}
+						{% for error in form.title.errors %}	
+							<div class='invalid-feedback'>
+								<span>{{ error }}</span>
+							</div>
+						{%endfor %}
+					{% else %}
+						{{ form.title(class='form-control form-control-lg') }}	
+					{% endif %}				
+				</div>
+
+				<!-- Password Field -->
+				<div class='form-group'>
+					{{ form.content.label(class='form-control-label') }}
+					{% if form.content.errors %}
+						{{ form.content(class='form-control form-control-lg is-invalid') }}
+						{% for error in form.content.errors %}	
+							<div class='invalid-feedback'>
+								<span>{{ error }}</span>
+							</div>content
+						{%endfor %}
+					{% else %}
+						{{ form.content(class='form-control form-control-lg') }}	
+					{% endif %}				
+				</div>
+			</fieldset>
+			<div class='form-group'>
+				 {{ form.submit(class='btn btn-outline-info') }}
+			</div>
+		</form>
+	</div>
+{% endblock webpage_content %}
+

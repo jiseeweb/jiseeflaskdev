@@ -1,2 +1,2 @@
 # jiseeflaskdev
-Projects and Tutorials followed through internet.
+Projects and Tutorials using Flask through internet.

@@ -4,9 +4,9 @@
 		<form action="" method="POST" accept-charset="utf-8">
 			{{ form.hidden_tag() }}
 			<fieldset class='form-group'>
-				<legend class='border-bottom mb-4'>Create Post</legend>
+				<legend class='border-bottom mb-4'>{{ legend }}</legend>
 
-				<!-- Email Field -->
+				<!-- Title Field -->
 				<div class='form-group'>
 					{{ form.title.label(class='form-control-label') }}
 					{% if form.title.errors %}
@@ -21,7 +21,7 @@
 					{% endif %}				
 				</div>
 
-				<!-- Password Field -->
+				<!-- Content Field -->
 				<div class='form-group'>
 					{{ form.content.label(class='form-control-label') }}
 					{% if form.content.errors %}

@@ -63,10 +63,10 @@ class ResetRequestForm(FlaskForm):
 
 
 	def validate_email(self, email):
-		if current_user.email != email.data:
-			user = User.query.filter_by(email=email.data).first()
-			if user is None:
-				raise ValidationError('E-mail doesn\'t exist. Create an account instead.')
+		#if current_user.email != email.data:
+		user = User.query.filter_by(email=email.data).first()
+		if user is None:
+			raise ValidationError('E-mail doesn\'t exist. Create an account instead.')
 
 
 class ResetPasswordForm(FlaskForm):

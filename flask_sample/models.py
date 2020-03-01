@@ -16,14 +16,14 @@ class User(db.Model, UserMixin):
 	post = db.relationship('Post', backref='author', lazy=True) # for user_id in post (relationship)
 
 	def get_reset_token(self, exp_time=1800):
-		s = Serializer(app['SECRET_KEY'], exp_time)
-		return s.dumps({'username': self.id}).decode('utf-8')
+		s = Serializer(app.config['SECRET_KEY'], exp_time)
+		return s.dumps({'user_id': self.id}).decode('utf-8')
 
 	@staticmethod
 	def validate_reset_token(token):
-		s = Serializer(app['SECRET_KEY'])
+		s = Serializer(app.config['SECRET_KEY'])
 		try:
-			s.loads(token)['user_id']
+			user_id = s.loads(token)['user_id']
 		except:
 			return None
 		return User.query.get(user_id)

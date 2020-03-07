@@ -1,4 +1,6 @@
-from flask_sample import app
+from flask_sample import create_app
 
-if __name__ == '__main__':
-	app.debug=True
+app = create_app()
+
+# if __name__ == '__main__':
+# 	app.run()

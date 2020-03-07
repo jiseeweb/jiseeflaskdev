@@ -1,9 +1,10 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from flask_sample.models import User
 from flask_login import current_user
 from wtforms.validators import DataRequired, Email, EqualTo, Length, ValidationError
+
 
 class RegistrationForm(FlaskForm):
 	username = StringField('Username', validators=[DataRequired(), Length(min=3, max=12)])
@@ -23,6 +24,7 @@ class RegistrationForm(FlaskForm):
 		if user:
 			raise ValidationError('E-mail already exist. Please choose another one.')
 
+
 class LoginForm(FlaskForm):
 	email = StringField('Email', validators=[DataRequired(), Email()])
 	password = PasswordField('Password', validators=[DataRequired()])
@@ -36,6 +38,7 @@ class UpdateAccountForm(FlaskForm):
 	photo = FileField('Profile Photo', validators=[FileAllowed(['png', 'jpg'])])
 	submit = SubmitField('Update')
 
+
 	# Custom Validation Autocalled? YES
 	def validate_username(self, username):
 		if current_user.username != username.data:
@@ -43,18 +46,12 @@ class UpdateAccountForm(FlaskForm):
 			if user:
 				raise ValidationError('Username already exist. Please choose another one.')
 
+
 	def validate_email(self, email):
 		if current_user.email != email.data:
 			user = User.query.filter_by(email=email.data).first()
 			if user:
 				raise ValidationError('E-mail already exist. Please choose another one.')
-
-
-class PostForm(FlaskForm):
-
-	title = StringField('Title', validators=[DataRequired()])
-	content = TextAreaField('Content', validators=[DataRequired()])
-	submit = SubmitField('Post')
 
 
 class ResetRequestForm(FlaskForm):
